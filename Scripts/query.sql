@@ -56,3 +56,28 @@ ON sls.employeeId = emp.employeeId
 WHERE sls.soldDate >= '2021-01-01'
 AND sls.soldDate <= '2022-01-01'
 ORDER BY soldDate ASC;
+
+GO 
+
+SELECT *
+FROM sales sls 
+INNER JOIN inventory inv 
+ON sls.inventoryId = inv.inventoryId;
+
+SELECT *
+FROM model
+LIMIT 10;
+
+SELECT modelId, model, EngineType
+FROM model
+WHERE EngineType = 'Electric';
+
+SELECT sls.soldDate, sls.salesAmount, inv.colour, inv.year
+FROM sales sls 
+INNER JOIN inventory inv 
+ON sls.inventoryId = inv.inventoryId
+WHERE inv.modelId IN (
+  SELECT modelId
+  FROM model 
+  WHERE EngineType = 'Electric'
+);
